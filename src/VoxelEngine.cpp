@@ -1,6 +1,10 @@
 #include <iostream>
+
+#include <glad/glad.h>
+#include "Settings.hpp"
 #include "VoxelEngine.hpp"
-#include "GLFW/glfw3.h"
+#include "QuadMaterial.hpp"
+
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
@@ -86,6 +90,7 @@ void VoxelEngine::handleEvents(){
 
 void VoxelEngine::run(){
     float lastTime;
+    QuadMaterial quad;
     while(!glfwWindowShouldClose(window)){
         time = glfwGetTime();
         if(time - lastTime < TARGET_FRAME_TIME){

@@ -4,7 +4,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(OpenGL REQUIRED)
 
-file(GLOB src src/*.cpp)
+file(GLOB_RECURSE src src/*.cpp)
 file(GLOB imgui dependencies/lib/imgui/*.cpp)
 
 add_executable(Minecraft)
