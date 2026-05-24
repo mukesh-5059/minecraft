@@ -3,7 +3,6 @@
 #include <glad/glad.h>
 #include "Settings.hpp"
 #include "VoxelEngine.hpp"
-#include "materials/Materials.hpp"
 #include "mesh/Meshes.hpp"
 
 #include "imgui/imgui.h"
@@ -75,6 +74,7 @@ void VoxelEngine::update(){
 }
 
 void VoxelEngine::render(){
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     imguiWindows();
     
     glfwSwapBuffers(window);
@@ -89,10 +89,6 @@ void VoxelEngine::handleEvents(){
 
 void VoxelEngine::run(){
     float lastTime = 0.0f;
-    QuadMaterial quadMaterial;
-    QuadMesh quadMesh;
-    quadMesh.genVertexArrayObject();
-    quadMaterial.useMaterial();
 
     while(!glfwWindowShouldClose(window)){
         time = glfwGetTime();
@@ -104,10 +100,6 @@ void VoxelEngine::run(){
         lastTime = time;
 
         handleEvents();
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
-        quadMesh.render();
-        
         render();
     }
 
