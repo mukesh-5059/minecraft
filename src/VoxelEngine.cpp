@@ -3,13 +3,14 @@
 #include <glad/glad.h>
 #include "Settings.hpp"
 #include "VoxelEngine.hpp"
-#include "mesh/Meshes.hpp"
+#include "Scene.hpp"
+
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
 #include "imgui/imgui_impl_opengl3.h"
 
-VoxelEngine::VoxelEngine(bool enableDebugger) : enableDebugger(enableDebugger){
+VoxelEngine::VoxelEngine(bool enableDebugger) : enableDebugger(enableDebugger), scene(){
 
     if (!glfwInit())
         exit(-1);
@@ -39,10 +40,13 @@ VoxelEngine::VoxelEngine(bool enableDebugger) : enableDebugger(enableDebugger){
 
     glViewport(0, 0, RESOLUTION.x, RESOLUTION.y);
     glClearColor(CLEAR_COLOR.x, CLEAR_COLOR.y, CLEAR_COLOR.z, CLEAR_COLOR.w);
-    glEnable(GL_DEPTH_TEST  | GL_CULL_FACE);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     if(enableDebugger) enableDebuggerFunc();  //debugging line
+
+    scene = std::make_unique<Scene>();
 
     ImGui::CreateContext();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -69,14 +73,13 @@ void VoxelEngine::imguiWindows(){
 }
 
 void VoxelEngine::update(){
-    
-    
+    scene->update();
 }
 
 void VoxelEngine::render(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     imguiWindows();
-    
+    scene->render();
     glfwSwapBuffers(window);
 }
 
@@ -100,6 +103,7 @@ void VoxelEngine::run(){
         lastTime = time;
 
         handleEvents();
+        update();
         render();
     }
 
