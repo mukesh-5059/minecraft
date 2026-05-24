@@ -73,7 +73,7 @@ void VoxelEngine::imguiWindows(){
 }
 
 void VoxelEngine::update(){
-    scene->update();
+    scene->update(window, dt);
 }
 
 void VoxelEngine::render(){

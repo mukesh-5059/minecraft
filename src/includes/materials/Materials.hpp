@@ -3,6 +3,7 @@
 
 class QuadMaterial : public BaseMaterial{
     public:
+        glm::mat4 modelMatrix, viewMatrix, projectionMatrix;
         QuadMaterial();
         ~QuadMaterial();
 
