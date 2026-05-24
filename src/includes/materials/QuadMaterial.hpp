@@ -1,5 +1,5 @@
 #pragma once
-#include "BaseMaterial.hpp"
+#include "materials/BaseMaterial.hpp"
 
 class QuadMaterial : public BaseMaterial{
     public:

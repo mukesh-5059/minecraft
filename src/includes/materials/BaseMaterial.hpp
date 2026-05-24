@@ -12,4 +12,5 @@ class BaseMaterial{
 
         virtual void setUniformsOnInit(){}
         virtual void updateUniforms(){}
+        void useMaterial(){shaderProgram.bind();}
 };
