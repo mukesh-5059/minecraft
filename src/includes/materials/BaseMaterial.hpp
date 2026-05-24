@@ -1,5 +1,5 @@
 #pragma once
-#include "Shader.hpp"
+#include "materials/Shader.hpp"
 
 
 class BaseMaterial{
@@ -8,7 +8,7 @@ class BaseMaterial{
 
     public:
         BaseMaterial(std::string shaderName) : shaderProgram(shaderName){}
-        ~BaseMaterial(){}
+        virtual ~BaseMaterial(){}
 
         virtual void setUniformsOnInit(){}
         virtual void updateUniforms(){}

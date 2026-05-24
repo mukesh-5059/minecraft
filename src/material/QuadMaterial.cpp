@@ -1,4 +1,4 @@
-#include "materials/QuadMaterial.hpp"
+#include "materials/Materials.hpp"
 
 QuadMaterial::QuadMaterial() : BaseMaterial("quad"){
     setUniformsOnInit();

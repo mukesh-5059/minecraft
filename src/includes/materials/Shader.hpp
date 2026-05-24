@@ -10,7 +10,7 @@ class ShaderProgram{
     std::unordered_map<std::string, unsigned int> uniforms;
 
     public:
-        ShaderProgram(std::string shaderName = "quad");
+        ShaderProgram(std::string shaderName);
         ~ShaderProgram();
 
         unsigned int getUniformLocation(std::string uniform);

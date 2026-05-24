@@ -3,7 +3,8 @@
 #include <glad/glad.h>
 #include "Settings.hpp"
 #include "VoxelEngine.hpp"
-#include "QuadMaterial.hpp"
+#include "materials/Materials.hpp"
+#include "mesh/Meshes.hpp"
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
@@ -39,7 +40,7 @@ VoxelEngine::VoxelEngine(bool enableDebugger) : enableDebugger(enableDebugger){
 
     glViewport(0, 0, RESOLUTION.x, RESOLUTION.y);
     glClearColor(CLEAR_COLOR.x, CLEAR_COLOR.y, CLEAR_COLOR.z, CLEAR_COLOR.w);
-    glEnable(GL_DEPTH_TEST | GL_DEPTH_TEST | GL_CULL_FACE);
+    glEnable(GL_DEPTH_TEST  | GL_CULL_FACE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     if(enableDebugger) enableDebuggerFunc();  //debugging line
@@ -74,8 +75,6 @@ void VoxelEngine::update(){
 }
 
 void VoxelEngine::render(){
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     imguiWindows();
     
     glfwSwapBuffers(window);
@@ -89,8 +88,12 @@ void VoxelEngine::handleEvents(){
 }
 
 void VoxelEngine::run(){
-    float lastTime;
-    QuadMaterial quad;
+    float lastTime = 0.0f;
+    QuadMaterial quadMaterial;
+    QuadMesh quadMesh;
+    quadMesh.genVertexArrayObject();
+    quadMaterial.useMaterial();
+
     while(!glfwWindowShouldClose(window)){
         time = glfwGetTime();
         if(time - lastTime < TARGET_FRAME_TIME){
@@ -101,6 +104,10 @@ void VoxelEngine::run(){
         lastTime = time;
 
         handleEvents();
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        quadMesh.render();
+        
         render();
     }
 

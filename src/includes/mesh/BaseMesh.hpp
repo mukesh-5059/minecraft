@@ -8,12 +8,13 @@ class BaseMesh{
         VertexArray vao;
         VertexBuffer vbo;
         IndexBuffer ibo;
+        virtual void genVertexData(){}
+        virtual void genIndexData(){}
 
     public:
-        BaseMesh();
-        ~BaseMesh();
+        BaseMesh(){}
+        virtual ~BaseMesh(){}
 
-        virtual void genVertexData();
-        virtual void genIndexData();
-        virtual void genVertexArrayObject();
+        virtual void genVertexArrayObject(){}
+        virtual void render(){}
 };

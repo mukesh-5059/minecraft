@@ -10,6 +10,11 @@ VertexBuffer::VertexBuffer(const void* data, unsigned int size)
  : rendererId(0) {
     glGenBuffers(1, &rendererId);
     bind();
+    setData(data, size);
+ }
+    
+
+void VertexBuffer::setData(const void* data, unsigned int size){
     glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 }
 

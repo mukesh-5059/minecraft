@@ -1,5 +1,5 @@
 #include <glad/glad.h>
-#include "Shader.hpp"
+#include "materials/Shader.hpp"
 
 #include <fstream>
 #include <iostream>

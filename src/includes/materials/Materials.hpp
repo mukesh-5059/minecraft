@@ -6,6 +6,6 @@ class QuadMaterial : public BaseMaterial{
         QuadMaterial();
         ~QuadMaterial();
 
-        void setUniformsOnInit();
-        void updateUniforms();
+        void setUniformsOnInit() override;
+        void updateUniforms() override;
 };

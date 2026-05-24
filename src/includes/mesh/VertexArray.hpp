@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "VertexBuffer.hpp"
+#include "mesh/VertexBuffer.hpp"
 
 
 struct vertexAttribute{
