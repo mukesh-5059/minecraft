@@ -21,6 +21,7 @@ class VertexArrayLayout{
 
 class VertexArray{
     unsigned int rendererId;
+    unsigned int vertexCount;
 
     public:
     VertexArray();
@@ -29,6 +30,7 @@ class VertexArray{
     void bindLayout(const VertexBuffer& vb, const VertexArrayLayout& layout);
     void bind();
     void unbind();
+    unsigned int getVertexCount(){return vertexCount;}
     
 }; 
 

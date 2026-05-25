@@ -13,11 +13,12 @@ void VertexArrayLayout::add(unsigned int type, unsigned int count, bool normaliz
     vertexSize += s;
 }
 
-VertexArray::VertexArray(){
+VertexArray::VertexArray() : vertexCount(0){
     glGenVertexArrays(1, &rendererId);
 }
 
 void VertexArray::bindLayout(const VertexBuffer& vb, const VertexArrayLayout& layout){
+    this->vertexCount = vb.getBufferSize() / layout.vertexSize;
     bind();
     vb.bind();
     long int offset = 0;

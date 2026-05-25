@@ -2,12 +2,12 @@
 
 #include <mesh/VertexBuffer.hpp>
 
-VertexBuffer::VertexBuffer() : rendererId(0){
+VertexBuffer::VertexBuffer() : rendererId(0), bufferSize(0){
     glGenBuffers(1, &rendererId);
 }
 
 VertexBuffer::VertexBuffer(const void* data, unsigned int size)
- : rendererId(0) {
+ : rendererId(0), bufferSize(size) {
     glGenBuffers(1, &rendererId);
     bind();
     setData(data, size);
@@ -15,6 +15,7 @@ VertexBuffer::VertexBuffer(const void* data, unsigned int size)
     
 
 void VertexBuffer::setData(const void* data, unsigned int size){
+    bufferSize = size;
     glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 }
 

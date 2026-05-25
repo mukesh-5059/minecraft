@@ -6,9 +6,9 @@
 
 class Scene{
     Quad quad;
-    Camera camera;
 
     public:
+        Camera camera;
         Scene();
         ~Scene();
 

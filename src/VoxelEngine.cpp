@@ -62,6 +62,10 @@ void VoxelEngine::imguiWindows(){
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
+    ImGui::Begin("Control Panel");
+    if(ImGui::Button("to origin")) scene->camera.setPosition(glm::vec3(0.0));
+    ImGui::End();
+
     ImGui::Begin("FPS");
     ImGui::Text("dt: %.3f ms/frame", dt * 1000);
     ImGui::Text("FPS: %.1f", 1/dt);

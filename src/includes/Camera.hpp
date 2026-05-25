@@ -13,8 +13,6 @@ private:
     float yaw;
     float pitch;
 
-    float movementSpeed;
-    float mouseSensitivity;
     float fov;
 
     bool firstClick;
@@ -35,7 +33,4 @@ public:
     glm::vec3 getPosition() const { return pos; }
     void setPosition(glm::vec3 newPos) { pos = newPos; }
     void setRotation(float newYaw, float newPitch);
-    
-    float getSpeed() const { return movementSpeed; }
-    void setSpeed(float speed) { movementSpeed = speed; }
 };

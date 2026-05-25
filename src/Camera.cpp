@@ -5,8 +5,8 @@
 #include "imgui/imgui.h"
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
-    : pos(position), worldUp(up), yaw(yaw), pitch(pitch), 
-      movementSpeed(3.5f), mouseSensitivity(0.1f), fov(45.0f), firstClick(true) {
+    : pos(PLAYER_POS), worldUp(up), yaw(yaw), pitch(pitch), 
+      fov(V_FOV), firstClick(true) {
     updateCameraVectors();
 }
 
@@ -23,7 +23,7 @@ void Camera::updateCameraVectors() {
 
 void Camera::captureInput(GLFWwindow* window, float dt) {
     ImGuiIO& io = ImGui::GetIO();
-    float velocity = movementSpeed * dt;
+    float velocity = PLAYER_SPEED * dt;
 
     if (!io.WantCaptureKeyboard) {
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) pos += front * velocity;
@@ -55,8 +55,8 @@ void Camera::captureInput(GLFWwindow* window, float dt) {
 
             glfwSetCursorPos(window, width / 2.0, height / 2.0);
 
-            yaw += xOffset * mouseSensitivity;
-            pitch += yOffset * mouseSensitivity;
+            yaw += xOffset * MOUSE_SENSITIVITY;
+            pitch += yOffset * MOUSE_SENSITIVITY;
 
             pitch = std::clamp(pitch, -PITCH_MAX, PITCH_MAX);
 
@@ -73,7 +73,7 @@ glm::mat4 Camera::getViewMatrix() {
 }
 
 glm::mat4 Camera::getProjectionMatrix() {
-    return glm::perspective(V_FOV, ASPECT_RATIO, NEAR, FAR);
+    return glm::perspective(fov, ASPECT_RATIO, NEAR, FAR);
 }
 
 void Camera::setRotation(float newYaw, float newPitch) {

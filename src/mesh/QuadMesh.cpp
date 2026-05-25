@@ -12,24 +12,18 @@ void QuadMesh::genVertexData(){
         -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,
          0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,
          0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
-        -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f
+
+         0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f,
+        -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f,
+        -0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f
     };
     vbo.bind();
     vbo.setData(vertices, sizeof(vertices));
 }
 
-void QuadMesh::genIndexData(){
-    const unsigned int indices[] = {
-        0, 1, 2,
-        2, 3, 0
-    };
-    ibo.bind();
-    ibo.setData(indices, sizeof(indices) / sizeof(unsigned int));
-}
 
 void QuadMesh::genVertexArrayObject(){
     genVertexData();
-    genIndexData();
     VertexArrayLayout vl;
 
     vl.add(GL_FLOAT, 3, GL_FALSE); 
@@ -40,8 +34,7 @@ void QuadMesh::genVertexArrayObject(){
 
 void QuadMesh::render(){
     vao.bind();
-    ibo.bind();
-    glDrawElements(GL_TRIANGLES, ibo.getCount(), GL_UNSIGNED_INT, NULL);
+    glDrawArrays(GL_TRIANGLES, 0, vao.getVertexCount());
 }
 
 QuadMesh::~QuadMesh(){
